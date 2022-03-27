@@ -1,0 +1,13 @@
+{% extends 'tax_app/base.html' %}
+
+
+{% block profile %}
+<div class='container'>
+  <p>{{ user.first_name }} {{ user.last_name }}</p>
+  <p> UserName : {{ user.username }}</p>
+  <p>Role : {{ user.profile.role }}</p>
+  <p>Created : {{ user.profile.created }}</p>
+  <p>Updated : {{ user.profile.updated }}</p>
+</div>
+
+{% endblock %}

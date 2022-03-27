@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    db:
+        image: 'postgres:latest'
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        environment:
+          POSTGRES_USER: USER
+          POSTGRES_PASSWORD: PASSWORD
+          POSTGRES_DB: NAME
+    web:
+        build: .
+        command: python manage.py runserver 0.0.0.0:8000
+        ports:
+            - 8000:8000
+        depends_on:
+            - db

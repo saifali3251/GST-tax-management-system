@@ -1,0 +1,10 @@
+{% extends "tax_app/base.html" %}
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  <p>Do you want to delete it?</p>
+  <input type="submit" name="confirm" class="btn btn-danger" value="Confirm">
+  <input type="submit" name="cancel" class="btn btn-primary" value="Cancel">
+
+</form>
+{% endblock %}

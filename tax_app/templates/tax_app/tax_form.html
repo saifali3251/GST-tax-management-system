@@ -1,0 +1,18 @@
+{% extends 'tax_app/base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col s12 m8 offset-m2">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <button type="submit" class="btn blue">Add</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

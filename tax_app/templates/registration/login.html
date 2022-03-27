@@ -1,0 +1,33 @@
+{% extends 'tax_app/base.html' %}
+{% block content %}
+<div class="ju">
+  {% if form.errors %}
+    {% for error in errors %}
+      <p>{{ error }}</p>
+    {% endfor %}
+  <!-- <p>Username or password didn't match!!</p> -->
+  {% endif %}
+ 
+  {% if next %}
+  <div class="center">
+    <h4>Please login to add new website</h4>
+  </div>
+  {% else %}
+  <div class="center">
+    <h4>Login</h4>
+  </div>
+  {% endif %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <form class="form-class" action="{% url 'login' %}" method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" class='btn btn-primary' value="Login">
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

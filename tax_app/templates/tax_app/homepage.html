@@ -1,0 +1,127 @@
+{% comment %} {% load blog_tags %} {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <!-- Google Font awesome -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+  <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet"> -->
+
+
+  <title>GST Tax-System</title>
+</head>
+
+<body>
+  <header class="main-header">
+    <nav class="transparent">
+      <div class="container">
+        <div class="nav-wrapper black-text">
+          <a href="{% url 'tax_app:homepage' %}" class="brand-logo black-text">
+            GST Tax-System</span>
+          </a>
+          <a href="#" data-activates='mobile-nav' class="button-collapse">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul class="right hide-on-med-and-down">
+            {% comment %} <li>
+              {% block nav-searchcontent %}
+              {% endblock %}
+            </li>
+            <li>
+              <a href="{% url 'blog:post_list' %}">
+                All Posts <span class="blue darken-3 white-text total-posts">
+                  {% total_posts %}
+                </span>
+              </a>
+            </li> {% endcomment %}
+            <!-- <li>
+            </li> -->
+            <!-- <li><a href="{% url blog:about_us }"></a></li>comment it -->
+            {% comment %} <li><a class="" href="#">Tags</a></li> {% endcomment %}
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <li><a class="black-text" href="{% url 'user_list' %}">Users</a></li>
+            {% comment %} <li><a class="black-text" href="{% url 'register' %}">Add User</a></li> {% endcomment %}
+            {% endif %}
+              {% comment %} <li><a class="black-text" href="{% url 'tax_app:add_bill' %}">Add Bill</a></li> {% endcomment %}
+              <li><a class="black-text" href="{% url 'tax_app:bill_list' %}">Bills</a></li>
+              <li><a class="black-text" href="{% url 'profile' %}">{{user.username}}[{{user.profile.role}}]</a></li>
+              <li><a class="black-text" href="{% url 'logout' %}">Log Out</a></li>
+            {% else %}
+            <li><a class="black-text" href="{% url 'register' %}">Sign Up</a></li>
+            <li><a class="black-text" href="{% url 'login' %}">LogIn</a></li>
+            {% endif %}
+          </ul>
+  </header>
+
+  <h3>Homepage!</h3>
+
+  <!-- Footer -->
+  {% comment %} <footer class="page-footer purple darken-3">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m6">
+          <h5 class="grey-text text-lighten-3 scrollspy" id="aboutus">About Us</h5>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, reprehenderit. Error saepe nesciunt,
+            commodi
+            eos quae libero? Quis, explicabo unde!</p>
+        </div>
+        <div class="col s12 m4 offset-m2">
+          <h5 class="grey-text text-lighten-3">Links</h5>
+          <ul>
+            <li>
+              <a href="" class="white-text">Link 1</a>
+            </li>
+            <li>
+              <a href="" class="white-text">Link 2</a>
+            </li>
+            <li>
+              <a href="" class="white-text">Link 3</a>
+            </li>
+            <li>
+              <a href="" class="white-text">Link 4</a>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright &copy; 2018
+        <a href="#" class="grey-text text-lighten-3 right">Terms & Conditions</a>
+      </div>
+    </div>
+  </footer> {% endcomment %}
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.button-collapse').sideNav();
+      $('.scrollspy').scrollSpy();
+
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+{% extends 'tax_app/base.html' %}
+
+
+{% block profile %}
+<div class='container'>
+  <div class='row'>
+    <div class='col'>
+  <form method="post">
+    {% csrf_token %}
+    {% comment %} {{ user_form.as_p }} {% endcomment %}
+    <a class="dropdown-button" data-activates="my-dropdown" href="#!">Select State</a>
+    {{ form.as_p }}
+    <button class='btn' type="submit">Update Role</button>
+  </form>
+</div>
+</div>
+</div>
+
+<ul id="my-dropdown" class="dropdown-content">
+  <li>
+    <a href="#">Link 1</a>
+  </li>
+  <li>
+    <a href="#">Link 2</a>
+  </li>
+  <li>
+    <a href="#">Link 3</a>
+  </li>
+</ul>
+
+{% endblock %}

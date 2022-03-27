@@ -1,0 +1,202 @@
+[
+{
+    "model": "tax_app.tax",
+    "pk": 1,
+    "fields": {
+        "userId": 2,
+        "state": "Goa",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "BFEW123",
+        "salaryIncome": 3000,
+        "stockIncome": 200,
+        "dueDate": "2022-03-26",
+        "created": "2022-03-25",
+        "updated": "2022-03-27T08:15:18.938Z",
+        "STATUS": "DELAYED",
+        "total_tax": 576.0,
+        "fines": -10,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 2,
+    "fields": {
+        "userId": 2,
+        "state": "Goa",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "QWAS123",
+        "salaryIncome": 3000,
+        "stockIncome": 320,
+        "dueDate": "2022-03-26",
+        "created": "2022-03-25",
+        "updated": "2022-03-25T14:31:31.292Z",
+        "STATUS": "New",
+        "total_tax": 597.6,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 3,
+    "fields": {
+        "userId": 3,
+        "state": "JHARKHAND",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "WAS1239FP",
+        "salaryIncome": 1000,
+        "stockIncome": 500,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T08:18:06.002Z",
+        "STATUS": "New",
+        "total_tax": 270.0,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 4,
+    "fields": {
+        "userId": 3,
+        "state": "JHARKHAND",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "AQWAS1231F",
+        "salaryIncome": 2000,
+        "stockIncome": 200,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T08:17:15.922Z",
+        "STATUS": "New",
+        "total_tax": 0.0,
+        "fines": 0,
+        "paymentStatus": "Paid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 5,
+    "fields": {
+        "userId": 4,
+        "state": "Lakshadweep",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "QWE1239F",
+        "salaryIncome": 100,
+        "stockIncome": 0,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T06:42:38.241Z",
+        "STATUS": "New",
+        "total_tax": 9.0,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 6,
+    "fields": {
+        "userId": 4,
+        "state": "Lakshadweep",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "ASEDC123",
+        "salaryIncome": 50,
+        "stockIncome": 50,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T06:52:28.145Z",
+        "STATUS": "New",
+        "total_tax": 18.0,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 7,
+    "fields": {
+        "userId": 4,
+        "state": "sdfsdv",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "sdcsdcsd",
+        "salaryIncome": 123456,
+        "stockIncome": 345,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T08:05:39.700Z",
+        "STATUS": "New",
+        "total_tax": 22284.18,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 8,
+    "fields": {
+        "userId": 4,
+        "state": "Goa",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "QWXX12",
+        "salaryIncome": 100,
+        "stockIncome": 100,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T08:06:48.945Z",
+        "STATUS": "New",
+        "total_tax": 36.0,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 9,
+    "fields": {
+        "userId": 5,
+        "state": "goa",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "QWAS123NF",
+        "salaryIncome": 100,
+        "stockIncome": 0,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T08:14:26.671Z",
+        "STATUS": "New",
+        "total_tax": 0.0,
+        "fines": 0,
+        "paymentStatus": "Paid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 10,
+    "fields": {
+        "userId": 5,
+        "state": "West Bengal",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "BGFD399FA",
+        "salaryIncome": 1000,
+        "stockIncome": 200,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T08:13:11.120Z",
+        "STATUS": "New",
+        "total_tax": 0.0,
+        "fines": 0,
+        "paymentStatus": "Paid"
+    }
+}
+]

@@ -1,0 +1,16 @@
+{% extends 'tax_app/base.html' %}
+
+{% block content %}
+
+  <div class='container'>
+    <div>
+    <button>
+      <a href="{{ bill.get_absolute_url }}" class="black-text">
+      Back
+    </a>
+  </button>
+  </div>
+    <h3 class='green'>Payment Done!!</h3>
+  </div>
+
+{% endblock %}

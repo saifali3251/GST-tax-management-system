@@ -1,0 +1,51 @@
+{% extends 'tax_app/base.html' %}
+
+{% block bill_detail %}
+
+<section class="section title-section ">
+  <h4 class="post-title center-align black-text">{{ bill.userId }}</h4>
+  <div class="container">
+  <p>Bill Id : {{ bill.id }}</p>
+  <p>State : {{ bill.state }}</p>
+  <p>Created By : {{ bill.userId }}</p>
+  <p>User Id : {{ bill.userId.id }}</p>
+  <p>PAN CARD : {{ bill.PanCard }}</p>
+  <p>Salary : {{ bill.salaryIncome }}</p>
+  <p>Stock Income : {{ bill.stockIncome }}</p>
+  <p>Bill Status : {{ bill.STATUS }}</p>
+  <p>Fine : {{ bill.fines }}</p>
+  <p>Tax Due : {{ bill.total_tax }}</p>
+  <p>Created : {{ bill.created }}</p>
+  <p>Last Updated : {{ bill.updated }}</p>
+  <p>DueDate : {{ bill.dueDate }}</p>
+  <p>Payment Status : <b>{{ bill.paymentStatus }}</b></p>
+
+
+  {% if bill.userId == request.user or user.is_superuser or user.profile.role == 'Tax-Accountant' %}
+    {% if bill.paymentStatus == 'Paid' %}
+    <a class="btn btn-primary">Update</a>
+    {% else %}
+    <a class="btn btn-primary" href="{% url 'tax_app:bill_update' pk=bill.id %}">Update</a>
+    {% endif %}
+    <a class="btn btn-danger red" href="{% url 'tax_app:bill_delete' pk=bill.id %}">Delete</a>
+
+  {% endif %}
+  {% if bill.userId == request.user %}
+    {% if bill.paymentStatus == 'Paid' %}
+    <a class="btn btn-primary green darken-3">Paid</a>
+    {% else %}
+    <a class="btn btn-primary yellow darken-3" href="{% url 'tax_app:bill_pay' pk=bill.id %}">Pay Now</a>
+    {% endif %}
+  {% endif %}
+
+  {% comment %} <div class="published-date center">Published : {{ post.publish | date:"d M Y" }}</div> {% endcomment %}
+</section>
+
+{% comment %} {% if bill.length==0 %} {% endcomment %}
+{% comment %} <h3>No bills found!</h3> {% endcomment %}
+{% comment %} {% endif %} {% endcomment %}
+{% comment %} {% for bill in bills %} {% endcomment %}
+
+
+{% comment %} {% endfor %} {% endcomment %}
+{% endblock %}

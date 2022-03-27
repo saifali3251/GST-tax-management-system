@@ -1,0 +1,55 @@
+{% extends 'tax_app/base.html' %}
+{% load static %}
+
+<!--   <link rel="stylesheet" href="{% static 'css/master.css' %}"> -->
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col s12 m6 center register-form">
+      <form class="form-class" method="post">
+        {% csrf_token %}
+        <div class="form-field">
+          {{form.first_name.label_tag}}
+          {{form.first_name}}
+          {% for error in form.first_name.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <div class="form-field">
+          {{form.last_name.label_tag}}
+          {{form.last_name}}
+        </div>
+        <div class="form-field">
+          {{profile_form.middleName.label_tag}}
+          {{profile_form.middleName}}
+        </div>
+        <div class="form-field">
+          {{form.username.label_tag}}
+          {{form.username}}
+        </div>
+        <div class="form-field">
+          {{form.password1.label_tag}}
+          {{form.password1}}
+          {% for error in form.password1.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <div class="form-field">
+          {{form.password2.label_tag}}
+          {{form.password2}}
+          {% for error in form.password2.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </div>
+          <div class="input-field">
+            <input disabled placeholder="Role" id="role" type="text" value="Tax-Payer">
+            <label class='right' for="role">Role</label>
+          </div>
+        <button class='btn' type="submit">Sign up</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

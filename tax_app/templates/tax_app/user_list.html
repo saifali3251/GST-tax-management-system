@@ -1,0 +1,27 @@
+{% extends 'tax_app/base.html' %}
+
+{% block user_list %}
+<div class="list-section">
+  <div class="row">
+    <div class="col s12 m6 offset-m2 lighten-3">
+      <ul class="list-collection">
+        {% comment %} <button class='btn grey lighten-3'><a href="" class="black-text">Tax-Payer</a></button>
+        <span></span>
+        <button class='btn grey lighten-3'><a href="" class="black-text">Tax-Accountant</a></button> {% endcomment %}
+        <br>
+        {% for user in users %}
+        <li class="card z-depth-2 collection-item avatar">
+            <div class="title blue-text">
+              <a href="{{ user.profile.get_absolute_url }}" class="black-text">
+                {{ user.username }} User ID : {{ user.id }}
+              </a>
+              {% comment %} <span>{{  }}</span> {% endcomment %}
+              <span class="right red-text">{{ user.profile.role }}</span>
+            </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
