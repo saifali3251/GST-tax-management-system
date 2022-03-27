@@ -12,7 +12,7 @@
         "stockIncome": 200,
         "dueDate": "2022-03-26",
         "created": "2022-03-25",
-        "updated": "2022-03-27T08:15:18.938Z",
+        "updated": "2022-03-27T09:50:13.771Z",
         "STATUS": "DELAYED",
         "total_tax": 576.0,
         "fines": -10,
@@ -72,7 +72,7 @@
         "stockIncome": 200,
         "dueDate": "2022-03-28",
         "created": "2022-03-27",
-        "updated": "2022-03-27T08:17:15.922Z",
+        "updated": "2022-03-27T16:04:03.687Z",
         "STATUS": "New",
         "total_tax": 0.0,
         "fines": 0,
@@ -197,6 +197,126 @@
         "total_tax": 0.0,
         "fines": 0,
         "paymentStatus": "Paid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 11,
+    "fields": {
+        "userId": 3,
+        "state": "JHARKHAND",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "QWEASR",
+        "salaryIncome": 100,
+        "stockIncome": 200,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T09:38:11.819Z",
+        "STATUS": "New",
+        "total_tax": 54.0,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 12,
+    "fields": {
+        "userId": 7,
+        "state": "Delhi",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "SNOW001",
+        "salaryIncome": 10000,
+        "stockIncome": 40000,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T15:49:15.893Z",
+        "STATUS": "New",
+        "total_tax": 0.0,
+        "fines": 0,
+        "paymentStatus": "Paid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 13,
+    "fields": {
+        "userId": 7,
+        "state": "Delhi",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "WHITE100",
+        "salaryIncome": 100,
+        "stockIncome": 40,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T09:52:09.828Z",
+        "STATUS": "New",
+        "total_tax": 12.6,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 14,
+    "fields": {
+        "userId": 8,
+        "state": "Karnataka",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "QWAS123",
+        "salaryIncome": 5000,
+        "stockIncome": 300,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T10:06:52.233Z",
+        "STATUS": "New",
+        "total_tax": 954.0,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 15,
+    "fields": {
+        "userId": 9,
+        "state": "Gujarat",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "PIVOT123",
+        "salaryIncome": 1000,
+        "stockIncome": 500,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T09:55:47.423Z",
+        "STATUS": "New",
+        "total_tax": 270.0,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
+    }
+},
+{
+    "model": "tax_app.tax",
+    "pk": 16,
+    "fields": {
+        "userId": 9,
+        "state": "Gujarat",
+        "SGST": 9.0,
+        "CGST": 9.0,
+        "PanCard": "PIVOT123",
+        "salaryIncome": 300,
+        "stockIncome": 20,
+        "dueDate": "2022-03-28",
+        "created": "2022-03-27",
+        "updated": "2022-03-27T09:56:06.559Z",
+        "STATUS": "New",
+        "total_tax": 57.6,
+        "fines": 0,
+        "paymentStatus": "Unpaid"
     }
 }
 ]
