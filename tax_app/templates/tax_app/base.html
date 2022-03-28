@@ -41,7 +41,9 @@
               {% if user.is_authenticated %}
               {% if user.is_superuser %}
               <li><a class="black-text" href="{% url 'user_list' %}">Users</a></li>
-              {% comment %} <li><a class="black-text" href="{% url 'tax_app:bill_list' %}">Add User</a></li> {% endcomment %}
+              <li><a class="black-text" href="{% url 'tax_app:bill_list' %}">
+                Total Tax
+              </a></li>
               {% endif %}
               <li><a class="black-text" href="{% url 'tax_app:bill_list' %}">Bills</a></li>
               <li><a class="black-text" href="{% url 'tax_app:add_bill' %}">Add Bill</a></li>
