@@ -27,8 +27,14 @@ def view_bills(request):
   if str(request.user) == 'admin' or str(request.user.profile.role) == 'Tax-Accountant':
     bills = Tax.objects.all().exclude(userId=1).order_by('id')
   else:
-    print('Else..')
+    # print('Else..')
     bills = Tax.objects.all().filter(userId=request.user).order_by('id')
+  for bill in bills:
+    if bill.dueDate <= date.today() and bill.paymentStatus == 'Unpaid':
+      nod = (date.today()-bill.dueDate).days
+      bill.STATUS = 'DELAYED'
+      bill.fines = -10*max(1,int(nod))
+    bill.save()
   bill_length = bills.count()
   return render(request,'bill_list.html',{'bills':bills,'bill_length':bill_length})
 
@@ -39,24 +45,24 @@ def bill_detail(request,pk):
   print(request.user,bill.userId)
   if request.user == bill.userId or str(request.user) == 'admin' or str(request.user.profile.role) == 'Tax-Accountant':
     print(bill.STATUS)
-    d1 = bill.dueDate
-    # d1 = datetime.date.strptime(str(bill.dueDate),'%Y-%m-%d')
-    d2 = bill.created
-    d3 = date.today()
-    print(d1,type(d1),d2,type(d2),d3,type(d3))
-    if d1 <= d3 and bill.paymentStatus == 'Unpaid':
-      # status = "Delayed"
-      # fine = -10
-      bill.STATUS = 'DELAYED'
-      bill.fines = -10
-    elif d1 <= d3 and bill.paymentStatus == 'Paid':
-      # status = "Delayed"
-      # fine = -10
-      bill.STATUS = 'New'
-      bill.fines = 0
-    else:
-      bill.STATUS = 'New'
-    bill.save()
+    # d1 = bill.dueDate
+    # # d1 = datetime.date.strptime(str(bill.dueDate),'%Y-%m-%d')
+    # d2 = bill.created
+    # d3 = date.today()
+    # print(d1,type(d1),d2,type(d2),d3,type(d3))
+    # if d1 <= d3 and bill.paymentStatus == 'Unpaid':
+    #   # status = "Delayed"
+    #   # fine = -10
+    #   bill.STATUS = 'DELAYED'
+    #   bill.fines = -10
+    # elif d1 <= d3 and bill.paymentStatus == 'Paid':
+    #   # status = "Delayed"
+    #   # fine = -10
+    #   bill.STATUS = 'New'
+    #   bill.fines = 0
+    # else:
+    #   bill.STATUS = 'New'
+    # bill.save()
   else:
     return HttpResponse('Unauthorised!')
   # context = {'status':status,'fine':fine}
