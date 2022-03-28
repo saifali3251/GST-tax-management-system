@@ -9,7 +9,7 @@ A tax management system with following features:
   - Once bill is PAID the payment status is marked as PAID. 
   - Bill status are marked as NEW and DELAYES based on "DueDate"
   - Users can filter there own bills based on different fields e.g, PAID,DELAYED,NEW, etc
-  - ADMIN can only create "Tax-Accountant"
+  - ADMIN can only assign user as "Tax-Accountant"
   - TA can Update any user's bill and can update the Tax Due based on dueDate
   - TA can also edit the user's tax-due but only until the bill is NOT paid. Once paid, it can't be updated
   - TA can view all the users list and their bills and can filter the bills based on different params
