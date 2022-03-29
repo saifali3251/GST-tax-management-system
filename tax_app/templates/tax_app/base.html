@@ -12,6 +12,10 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'blog/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
   <!-- Google Font awesome -->
   {% comment %} <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> {% endcomment %}
 
@@ -41,7 +45,7 @@
               {% if user.is_authenticated %}
               {% if user.is_superuser %}
               <li><a class="black-text" href="{% url 'user_list' %}">Users</a></li>
-              <li><a class="black-text" href="{% url 'tax_app:bill_list' %}">
+              <li><a class="black-text" href="{% url 'tax_app:bill_stats' %}">
                 Stats
               </a></li>
               {% endif %}
@@ -118,6 +122,7 @@
 
   <!-- Compiled and minified JavaScript -->
   <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+  <script src="{% static 'blog/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
   <script>
     $(document).ready(function () {
@@ -129,6 +134,23 @@
     });
       $('.button-collapse').sideNav();
       $('.scrollspy').scrollSpy();
+      $('.autocomplete').autocomplete({
+        data: {
+          'Andhra Pradesh': null,'Arunachal Pradesh': null,'Assam': null,'Bihar': null,
+          'Chhattisgarh': null,'Goa': null,'Gujarat': null,'Haryana': null,
+          'Himachal Pradesh': null,'Jammu Kashmir': null,'Jharkhand': null,
+          'Karnataka': null,'Kerala': null,'Madhya Pradesh': null,
+          'Maharashtra': null,'Manipur': null,'Meghalaya': null,
+          'Mizoram': null,'Nagaland': null,'Odisha': null,'Punjab': null,
+          'Rajasthan': null,'Sikkim': null,'Tamil Nadu': null,
+          'Telangana': null,'Tripura': null,'Uttar Pradesh': null,
+          'Uttarakhand': null,
+          'West Bengal': null,
+          'Andaman And Nicobar Islands': null,'Chandigarh': null,
+          'Dadra And Nagar Haveli': null,'Daman': null,'Delhi': null,
+          'Lakshadweep': null,'Pondicherry': null
+        }
+      });
 
     });
   </script>

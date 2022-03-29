@@ -16,6 +16,7 @@ urlpatterns = [
   path('bill/<int:pk>/delete',views.BillDeleteView,name='bill_delete'),
   path('bill-staus/<str:pk>',views.bill_status,name='bill_status'),
   path('payment-staus/<str:pk>',views.payment_status,name='payment_status'),
+  path('bill-stats/',views.bill_stats,name='bill_stats'),
 
 
   path('user-list/',account_view.user_list,name='user_list'),

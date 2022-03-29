@@ -3,22 +3,31 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col s12 m8 offset-m2">
+    <div class="col s12 m6 offset-m2">
       <form action="" method="POST" class="form-group">
         {% csrf_token %}
-        {% comment %} <div class="form-group col-md-12 mb-3">
+        <div>
+        <div class="input-field">
+          <label for="{{ form.state.label }}">{{ form.state.label }}</label>
+          <input type="text" required class="autocomplete"
+          id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
+          {% comment %} id="autocomplete-input" name="{{ form.state.name }}"> {% endcomment %}
+        </div>
+        <div class="input-field">
           <label for="{{ form.PanCard.label }}">{{ form.PanCard.label }}</label>
-          <input type="text" class="form-control" id="{{ form.PanCard.auto_id }}" name="{{ form.PanCard.name }}">
-        </div> {% endcomment %}
-        {% comment %} <div class="col s12 m8 offset-m2">
-          <label for="cars">Choose a car:</label>
-          <select name="cars" id="cars">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="opel">Opel</option>
-            <option value="audi">Audi</option>
-          </select>
-        </div> {% endcomment %}
+          <input type="text" required class="form-control"
+          id="{{ form.PanCard.auto_id }}" name="{{ form.PanCard.name }}" value="{{ form.PanCard.value|default:"" }}">
+        </div>
+        <div class="input-field">
+          <label for="{{ form.salaryIncome.label }}">{{ form.salaryIncome.label }}</label>
+          <input type="number" required class="form-control"
+          id="{{ form.salaryIncome.auto_id }}" name="{{ form.salaryIncome.name }}" value="{{ form.salaryIncome.value|default:"" }}">
+        </div>
+        <div class="input-field">
+          <label for="{{ form.stockIncome.label }}">{{ form.stockIncome.label }}</label>
+          <input type="number" required class=""
+          id="{{ form.stockIncome.auto_id }}" name="{{ form.stockIncome.name }}" value="{{ form.stockIncome.value|default:"" }}">
+        </div>
         {% comment %} <div class="form-group col-md-12 mb-3">
           <label for="{{ form.STATUS.label }}">{{ form.STATUS.label }}</label>
           <select id="{{ form.STATUS.auto_id }}" name="{{ form.STATUS.name }}">
@@ -28,21 +37,13 @@
           </select>
         </div> {% endcomment %}
         {% comment %} {{ form.media }} {% endcomment %}
-        {% comment %} <a class="dropdown-button" data-activates="my-dropdown" href="#!">Select State</a> {% endcomment %}
-        {{ form.as_p }}
+        {% comment %} {{ form.as_p }} {% endcomment %}
         {% comment %} <li>
           <a class="dropdown-button" data-activates="my-dropdown" href="#!">Dropdown
           </a>
             {% comment %} <i class="material-icons right">arrow_drop_down</i> {% endcomment %}
-        {% comment %} <label for="cars">Choose a car:</label>
-        <select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="opel">Opel</option>
-        <option value="audi">Audi</option>
-        </select> {% endcomment %}
         <br>
-        <br>
+        {% comment %} <br> {% endcomment %}
         <button type="submit" class="btn blue">Add</button>
       </form>
     </div>

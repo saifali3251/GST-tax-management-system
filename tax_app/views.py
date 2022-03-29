@@ -72,6 +72,7 @@ def bill_detail(request,pk):
 @login_required
 def billCreate(request):
   print(request.user)
+  # print(request.cleaned_data)
   if str(request.user) == 'admin' or str(request.user.profile.role) == 'Tax-Accountant':
     form = BillForm2
   else:
@@ -125,8 +126,8 @@ def BillUpdateView(request,pk):
 def BillPayView(request,pk):
   bill = Tax.objects.get(id=pk)
   bill.STATUS = 'New'
-  bill.total_tax = 0
-  bill.fines = 0
+  # bill.total_tax = 0
+  # bill.fines = 0
   bill.paymentStatus = 'Paid'
   bill.save()
   return render(request,'tax_pay.html',{'bill':bill})
@@ -169,3 +170,33 @@ def bill_status(request,pk):
   bill_length = bills.count()
   bill_length = bills.count()
   return render(request,'bill_list.html',{'bills':bills,'bill_length':bill_length})
+
+prev_tax = 0
+
+@login_required
+def bill_stats(request):
+  bills = Tax.objects.all()
+  # net tax,total tax,total fine,total paid,total due
+  total_due,total_fine,total_paid,total_tax = 0,0,0,0
+  for bill in bills:
+    total_tax += bill.total_tax
+    total_fine += bill.fines
+    if bill.paymentStatus == 'Paid':
+      total_paid += bill.total_tax + abs(bill.fines)
+    else:
+      total_due += bill.total_tax + abs(bill.fines)
+
+  diff = 0
+  if total_tax > prev_tax and prev_tax!=0:
+    diff = round((((total_tax-prev_tax)/prev_tax)*0.01),2)
+  else:
+    pass
+    # prev_tax = total_tax
+
+  context = {'total_tax':round(total_tax,2),'total_fine':round(total_fine,2),
+              'total_paid':round(total_paid,2),'total_due':round(total_due,2),
+              'net_tax':round(total_tax+abs(total_fine),2),'diff':diff}
+  return render(request,'bill_stats.html',{'context':context})
+
+
+# net_change = total_tax

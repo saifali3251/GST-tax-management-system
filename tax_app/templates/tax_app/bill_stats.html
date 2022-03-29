@@ -1,0 +1,18 @@
+{% extends 'tax_app/base.html' %}
+
+{% block content %}
+<div class='container'>
+  <div class='row'>
+    <div class='col'>
+      <ul>
+        <li> <b class='green-text darken-4'>Net Change : </b>{{ context.diff }}%</li>
+        <li> <b>Net Tax</b>{{ context.net_tax }}</li>
+        <li> <b>Total Tax</b> {{ context.total_tax }}</li>
+        <li> <b>Total Fine</b> {{ context.total_fine }}</li>
+        <li> <b>Total Paid</b> {{ context.total_paid }}</li>
+        <li> <b>Total Due</b> {{ context.total_due }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
