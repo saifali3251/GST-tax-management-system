@@ -69,8 +69,30 @@
             {% endif %}
           </ul>
   </header>
-
-  <h3>Homepage!</h3>
+  <br>
+  <h3 class="container center">Features</h3>
+  <div class='container'>
+    <div class='row'>
+      <ol>
+        <li>List, view and edit tax-payers -  this can only be done by "tax-accountant" and "admin" roles
+        </li>
+        <li>One tax-accountant can manage different tax-payers.
+        </li>
+        <li>Full tax is dependent on which state the tax-payer belongs to. Total tax = state tax + central tax. if it is a union territory, then no state tax (we expect you do some googling on your own to understand GST system)
+        </li>
+        <li>NOTE: we expect you to figure out what a "tax" object will look like. SGST, CGST, state tax, arrears, fines, etc. This is domain knowledge that we expect our engineers to figure out by themeselves. Will you use reducing interest rates, etc ? Especially tricky question is how will you handle dates - we are especially interested to see this code, since date handling is one of the trickiest things here (is it needed to handle timezone information in your database ?)
+        </li>
+        <li>Create a tax due -  This can be done only by "tax-accountant" role. The system will take certain inputs (PAN card of tax-payer, income from salary, income from share market, etc etc) and calculate the total tax due. It also sets status as NEW or DELAYED based on due date.
+        </li>
+        <li>Edit tax due. This can only be done by "tax-accountant". But it cannot be done if tax is already paid. IMPORTANT: We want to see how you design this. Can you save previous history ? In an extreme situation, can you "rollback" the changes ? Hint: the best designs here use "double safety" - logic in the code as well as database constraints.
+        </li>
+        <li>Mark tax as paid. This can only be done by tax-payer. P.S. you dont need to do any UPI integration. Just create a dummy !
+        </li>
+        <li> Ability to list and view tax due based on the filter applied -  By "filter" we mean - select by date of creation, date of update, state of tax (NEW, PAID, DELAYED), etc. This action can be done by all : "tax-payer", "tax-accountant" and "admin" roles. HOWEVER - "tax-payer" can only see his own taxes...while "tax-accountant" and "admin" can see everyone's taxes. The way you design your data model above will allow you to do this. Make sure there are no security loopholes here. (P.S. you have to show us by writing the testcases to illustrate this)
+        </li>
+        </ol>
+    </div>
+  </div>
 
   <!-- Footer -->
   {% comment %} <footer class="page-footer purple darken-3">

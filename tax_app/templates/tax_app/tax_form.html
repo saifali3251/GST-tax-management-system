@@ -1,6 +1,7 @@
 {% extends 'tax_app/base.html' %}
 
 {% block content %}
+{% comment %}
 <div class="container">
   <div class="row">
     <div class="col s12 m8 offset-m2">
@@ -12,7 +13,92 @@
       </form>
     </div>
   </div>
+</div> {% endcomment %}
+
+
+<div class="container">
+  <div class="row bill-form-class grey lighten-3">
+    <form action="" method="POST" class="form-group1">
+        {% csrf_token %}
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="input-field black-text">
+          <label for="{{ form.state.label }}">{{ form.state.label }}</label>
+          <input type="text" required class="autocomplete" placeholder="Enter State" id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
+          </div>
+        </div>
+        <div class="col s12 m6 right">
+          <div class="input-field black-text">
+          <label for="{{ form.PanCard.label }}">{{ form.PanCard.label }}</label>
+          <input type="text" required class="form-control" autocapitalize="on" placeholder="Pan Card"
+          id="{{ form.PanCard.auto_id }}" name="{{ form.PanCard.name }}" value="{{ form.PanCard.value|default:"" }}">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="input-field">
+          <label for="{{ form.salaryIncome.label }}">{{ form.salaryIncome.label }}</label>
+          <input type="number" min=0 max=100000 required class="form-control" placeholder="Salary Income"
+          id="{{ form.salaryIncome.auto_id }}" name="{{ form.salaryIncome.name }}" value="{{ form.salaryIncome.value|default:"" }}">
+          </div>
+        </div>
+        <div class="col s12 m6 right">
+          <div class="input-field">
+          <label for="{{ form.stockIncome.label }}">{{ form.stockIncome.label }}</label>
+          <input type="number" min=0 max=100000 required class="form-control" placeholder="Stock Income"
+          id="{{ form.stockIncome.auto_id }}" name="{{ form.stockIncome.name }}" value="{{ form.stockIncome.value|default:"" }}">
+          </div>
+        </div>
+      </div>
+      {% if user.is_superuser or user.profile.role == 'Tax-Accountant' %}
+      <div class="row">
+        <div class="col s6 m2">
+          <div class="input-field">
+          <label for="{{ form.fines.label }}">{{ form.fines.label }}</label>
+          <input type="number" required class="form-control" placeholder="Fine"
+          id="{{ form.fines.auto_id }}" name="{{ form.fines.name }}" value="{{ form.fines.value|default:"" }}">
+          </div>
+        </div>
+        <div class="col s6 m2">
+          <div class="input-field">
+          <label for="{{ form.total_tax.label }}">{{ form.total_tax.label }}</label>
+          <input type="number" readonly required class="form-control" placeholder="Stock Income"
+          id="{{ form.total_tax.auto_id }}" name="{{ form.total_tax.name }}" value="{{ form.total_tax.value|default:"" }}">
+          </div>
+        </div>
+        <div class="col s6 m2">
+          <div class="input-field">
+          <label for="{{ form.SGST.label }}">{{ form.SGST.label }}</label>
+          <input type="number" readonly required class="form-control" placeholder="SGST"
+          id="{{ form.SGST.auto_id }}" name="{{ form.SGST.name }}" value="{{ form.SGST.value|default:"" }}">
+          </div>
+        </div>
+        <div class="col s6 m2">
+          <div class="input-field">
+          <label for="{{ form.CGST.label }}">{{ form.CGST.label }}</label>
+          <input type="number" readonly min=0 max=10 required class="form-control" placeholder="Stock Income"
+          id="{{ form.CGST.auto_id }}" name="{{ form.CGST.name }}" value="{{ form.CGST.value|default:"" }}">
+          </div>
+        </div>
+        <div class="col s6 m4">
+          <div class="input-field">
+          <label for="{{ form.STATUS.label }}">{{ form.STATUS.label }}</label>
+          <input type="text" readonly required class="form-control" placeholder="Stock Income"
+          id="{{ form.STATUS.auto_id }}" name="{{ form.STATUS.name }}" value="{{ form.STATUS.value|default:"" }}">
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      <div class="row">
+        <div class="col s12 m3 offset-m6 submit-class">
+          <button type="submit" class="btn green darken-4">Update</button>
+        </div>
+        <div class="col s12 m3 submit-class right">
+          <button class="btn red darken-5">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
-
-
 {% endblock %}

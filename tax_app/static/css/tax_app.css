@@ -1,7 +1,16 @@
 .bill-form-class {
-    background-color: rgb(142, 146, 148) !important;
+    /* background-color: rgb(142, 146, 148) !important; */
     border-radius: 10px !important;
     padding: 14px;
+}
+
+.bill-form-class label {
+    /* font-family: cursive; */
+    /* padding-left: 5px !important; */
+    text-decoration-color: black !important;
+    position: absolute;
+    left: 20px;
+    font-size: 15px;
 }
 
 .form-group1 input {
@@ -10,7 +19,9 @@
     font-size: 18px !important;
     width: 60% !important;
     height: 30% !important;
-    border: rgb(62, 64, 65) 2px solid !important;
+    /* border: rgb(62, 64, 65) 2px solid !important; */
+    border: black 2px solid !important;
+    z-index: 3;
     border-radius: 10px !important;
 }
 
@@ -23,6 +34,11 @@
 .autocomplete-content {
     top: 60px !important;
     position: absolute;
-    width: 80%;
+    width: 70%;
+    background-color: bisque;
+    font-size: medium;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-decoration-color: black;
     text-align: center;
+    border-radius: 10px !important;
 }
