@@ -91,7 +91,8 @@ def billCreate(request):
       web1.fine = 0
       print(web1.userId)
     else:
-      return render(request,'tax_app/add_bill.html',{'form':form})
+      errors ='Invalid State'
+      return render(request,'tax_app/add_bill.html',{'form':form,'errors':errors})
     # print(form.cleaned_data)
     if form.is_valid():
       web1.save()
@@ -100,6 +101,7 @@ def billCreate(request):
       return HttpResponse('Not a valid field!')
   else:
     print('Else...')
+  # return render(request,'tax_app/bill_list.html',{'form':form})
   return render(request,'tax_app/add_bill.html',{'form':form})
 
 

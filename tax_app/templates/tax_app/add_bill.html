@@ -2,63 +2,95 @@
 
 {% block content %}
 <div class="container">
-  <div class="row">
-    <div class="col s12 m6 offset-m2">
-      <form action="" method="POST" class="form-group">
+  <div class="row bill-form-class">
+    <form action="" method="POST" class="form-group1">
         {% csrf_token %}
-        <div>
-        <div class="input-field">
-          <label for="{{ form.state.label }}">{{ form.state.label }}</label>
-          <input type="text" required class="autocomplete"
-          id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
-          {% comment %} id="autocomplete-input" name="{{ form.state.name }}"> {% endcomment %}
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="input-field black-text">
+          {% comment %} <label for="{{ form.state.label }}"></label> {% endcomment %}
+          <input type="text" required class="autocomplete" placeholder="Enter State" id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
+          </div>
         </div>
-        <div class="input-field">
-          <label for="{{ form.PanCard.label }}">{{ form.PanCard.label }}</label>
-          <input type="text" required class="form-control"
+        <div class="col s12 m6 right">
+          <div class="input-field black-text">
+          <label for="{{ form.PanCard.label }}"></label>
+          <input type="text" required class="form-control" autocapitalize="on" placeholder="Pan Card"
           id="{{ form.PanCard.auto_id }}" name="{{ form.PanCard.name }}" value="{{ form.PanCard.value|default:"" }}">
+          </div>
         </div>
-        <div class="input-field">
-          <label for="{{ form.salaryIncome.label }}">{{ form.salaryIncome.label }}</label>
-          <input type="number" required class="form-control"
+      </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="input-field">
+          <label for="{{ form.salaryIncome.label }}"></label>
+          <input type="number" min=0 max=100000 required class="form-control" placeholder="Salary Income"
           id="{{ form.salaryIncome.auto_id }}" name="{{ form.salaryIncome.name }}" value="{{ form.salaryIncome.value|default:"" }}">
+          </div>
         </div>
-        <div class="input-field">
-          <label for="{{ form.stockIncome.label }}">{{ form.stockIncome.label }}</label>
-          <input type="number" required class=""
+        <div class="col s12 m6 right">
+          <div class="input-field">
+          <label for="{{ form.stockIncome.label }}"></label>
+          <input type="number" min=0 max=100000 required class="form-control" placeholder="Stock Income"
           id="{{ form.stockIncome.auto_id }}" name="{{ form.stockIncome.name }}" value="{{ form.stockIncome.value|default:"" }}">
+          </div>
         </div>
-        {% comment %} <div class="form-group col-md-12 mb-3">
-          <label for="{{ form.STATUS.label }}">{{ form.STATUS.label }}</label>
-          <select id="{{ form.STATUS.auto_id }}" name="{{ form.STATUS.name }}">
-          {% for value, label in form.fields.STATUS.choices %}
-              <option value="{{ value }}"{% if form.STATUS.value == value %} selected{% endif %}>{{ label }}</option>
-          {% endfor %}
-          </select>
-        </div> {% endcomment %}
-        {% comment %} {{ form.media }} {% endcomment %}
-        {% comment %} {{ form.as_p }} {% endcomment %}
-        {% comment %} <li>
-          <a class="dropdown-button" data-activates="my-dropdown" href="#!">Dropdown
-          </a>
-            {% comment %} <i class="material-icons right">arrow_drop_down</i> {% endcomment %}
-        <br>
-        {% comment %} <br> {% endcomment %}
-        <button type="submit" class="btn blue">Add</button>
+      </div>
+      <div class="row">
+        <div class="col s12 m3 offset-m6 submit-class">
+          <button type="submit" class="btn green darken-4">Add Bill</button>
+        </div>
+        <div class="col s12 m3 submit-class right">
+          <button type="submit" class="btn yellow darken-4">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+{% comment %} <div class="container">
+  <div class="row grey lighten-3">
+    <div class="col s12 m6 offset-m2">
+      <form action="" method="POST" class="form-group1">
+        {% csrf_token %}
+      <div class="row">
+        <div class="col s12 m4 offset-m2">
+          <div class="input-field black-text">
+          <label for="{{ form.state.label }}"></label>
+          <input type="text" required class="autocomplete form-control" placeholder="Enter State" id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
+          </div>
+          <br>
+          <div class="input-field black-text">
+          <label for="{{ form.PanCard.label }}"></label>
+          <input type="text" required class="form-control" placeholder="Pan Card"
+          id="{{ form.PanCard.auto_id }}" name="{{ form.PanCard.name }}" value="{{ form.PanCard.value|default:"" }}">
+          </div>
+        </div>
+        <div class="col s12 m4 left-offset-m2">
+          <div class="input-field">
+          <label for="{{ form.salaryIncome.label }}"></label>
+          <input type="number" required class="form-control" placeholder="Salary Income"
+          id="{{ form.salaryIncome.auto_id }}" name="{{ form.salaryIncome.name }}" value="{{ form.salaryIncome.value|default:"" }}">
+          </div>
+          <br>
+          <div class="input-field">
+          <label for="{{ form.stockIncome.label }}"></label>
+          <input type="number" required class="form-control" placeholder="Stock Income"
+          id="{{ form.stockIncome.auto_id }}" name="{{ form.stockIncome.name }}" value="{{ form.stockIncome.value|default:"" }}">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m11 offset-m2 submit-class">
+          <button type="submit" class="btn green darken-4">Add</button>
+        </div>
+        </div>
+      </div>
       </form>
     </div>
   </div>
-</div>
-<ul id="my-dropdown" class="dropdown-content">
-  <li>
-    <a href="#">Link 1</a>
-  </li>
-  <li>
-    <a href="#">Link 2</a>
-  </li>
-  <li>
-    <a href="#">Link 3</a>
-  </li>
-</ul>
+</div> {% endcomment %}
 
 {% endblock %}
