@@ -114,9 +114,22 @@ def BillUpdateView(request,pk):
   else:
     form = BillForm(request.POST or None, instance=bill)
 
-  if form.is_valid():
+  print('Check1')
+  f = form.save(commit=False)
+  state_field = f.state
+  # print(bill.state.title())
+  f = False
+  val = 'Invalid'
+  if state_field.title() in STATE or state_field.title() in U_T:
+    print('Check')
+    f = True
+    val = 'Valid'
+  else:
+    return render(request,'tax_form.html',{'form':form,'val':val})
+
+  if form.is_valid() and f==True:
     print('Bills details :')
-    print(bill.salaryIncome,bill.stockIncome,bill.SGST,bill.CGST)
+    # print(bill.salaryIncome,bill.stockIncome,bill.SGST,bill.CGST)
     bill.total_tax = round((bill.salaryIncome + bill.stockIncome)*(bill.SGST + bill.CGST)*0.01,2)
     form.save()
     return redirect('tax_app:bill_detail',pk=pk)

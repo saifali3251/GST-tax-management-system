@@ -24,8 +24,12 @@
         <div class="col s12 m6">
           <div class="input-field black-text">
           <label for="{{ form.state.label }}">{{ form.state.label }}</label>
+          {% if val.Invalid %}
+          <input type="text" required class="autocomplete red-text" placeholder="Enter State" id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
+          {% else %}
           <input type="text" required class="autocomplete" placeholder="Enter State" id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
           </div>
+          {% endif %}
         </div>
         <div class="col s12 m6 right">
           <div class="input-field black-text">
