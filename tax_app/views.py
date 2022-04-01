@@ -92,7 +92,9 @@ def billCreate(request):
       print(web1.userId)
     else:
       errors ='Invalid State'
-      return render(request,'tax_app/add_bill.html',{'form':form,'errors':errors})
+      val = 'Invalid'
+      print(val)
+      return render(request,'tax_app/add_bill.html',{'form':form,'errors':errors,'val':val})
     # print(form.cleaned_data)
     if form.is_valid():
       web1.save()

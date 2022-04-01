@@ -23,13 +23,15 @@
       <div class="row">
         <div class="col s12 m6">
           <div class="input-field black-text">
-          <label for="{{ form.state.label }}">{{ form.state.label }}</label>
-          {% if val.Invalid %}
-          <input type="text" required class="autocomplete red-text" placeholder="Enter State" id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
-          {% else %}
-          <input type="text" required class="autocomplete" placeholder="Enter State" id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
+          <label for="{{ form.state.label }}" class="{% if val %}red-text{% endif %}">{{ form.state.label }}</label>
+          {% comment %} {% if val %} {% endcomment %}
+          <input type="text" required class="autocomplete {% if val %}red-text red lighten-4{% endif %}" placeholder="Enter State" id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}">
           </div>
-          {% endif %}
+          {% comment %} {% endif %} {% endcomment %}
+          {% comment %} {% else %} {% endcomment %}
+          {% comment %} <input type="text" required class="autocomplete" placeholder="Enter State" id="{{ form.state.auto_id }}" name="state" value="{{ form.state.value|default:"" }}"> {% endcomment %}
+          {% comment %} </div> {% endcomment %}
+          {% comment %} {% endif %} {% endcomment %}
         </div>
         <div class="col s12 m6 right">
           <div class="input-field black-text">
