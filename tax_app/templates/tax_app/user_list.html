@@ -1,13 +1,14 @@
 {% extends 'tax_app/base.html' %}
 
 {% block user_list %}
+{% comment %}
 <div class="list-section">
   <div class="row">
     <div class="col s12 m6 offset-m2 lighten-3">
       <ul class="list-collection">
         {% comment %} <button class='btn grey lighten-3'><a href="" class="black-text">Tax-Payer</a></button>
         <span></span>
-        <button class='btn grey lighten-3'><a href="" class="black-text">Tax-Accountant</a></button> {% endcomment %}
+        <button class='btn grey lighten-3'><a href="" class="black-text">Tax-Accountant</a></button>
         <br>
         {% for user in users %}
         <li class="card z-depth-2 collection-item avatar">
@@ -15,7 +16,6 @@
               <a href="{{ user.profile.get_absolute_url }}" class="black-text">
                 {{ user.username }} User ID : {{ user.id }}
               </a>
-              {% comment %} <span>{{  }}</span> {% endcomment %}
               <span class="right red-text">{{ user.profile.role }}</span>
             </div>
         </li>
@@ -23,5 +23,85 @@
       </ul>
     </div>
   </div>
-</div>
+</div> {% endcomment %}
+
+<!-- Section: Users -->
+<section class="section section-users grey lighten-4">
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Users</span>
+            <table class="striped">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>User Id</th>
+                  <th>UserName</th>
+                  <th>Registered</th>
+                  <th>Role</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr>
+                  <td width="10">
+                    {% comment %} <img src="{% static 'images/alt_user.png' %}" alt="logo" class="responsive-img circle" style="width: 40px;margin-left:10px;"> {% endcomment %}
+                    {% comment %} <img class="logo-img" src="images/alt_user.png" alt="friends-logo"> {% endcomment %}
+                  </td>
+                  <td>{{user.id}}</td>
+                  <td>{{user.username}}</td>
+                  <td>{{user.profile.created}}</td>
+                  <td>{{user.profile.role}}</td>
+                  <td>
+                    <a href="{{ user.profile.get_absolute_url }}" class="btn blue lighten-2">Details</a>
+                  </td>
+                  <td>
+                    <a href="{{user.profile.get_absolute_url}}">
+                    <i class="material-icons green-text">dashboard</i></a>
+                    </a>
+                    {% comment %} <a href="{{ user.profile.get_absolute_url }}" class="btn blue lighten-2">Details</a> {% endcomment %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="card-action">
+            <ul class="pagination">
+              <li class="disabled">
+                <a href="#!" class="blue-text">
+                  <i class="material-icons">chevron_left</i>
+                </a>
+              </li>
+              <li class="active blue lighten-2">
+                <a href="#!" class="white-text">1</a>
+              </li>
+              <li class="waves-effect">
+                <a href="#!" class="blue-text">2</a>
+              </li>
+              <li class="waves-effect">
+                <a href="#!" class="blue-text">3</a>
+              </li>
+              <li class="waves-effect">
+                <a href="#!" class="blue-text">4</a>
+              </li>
+              <li class="waves-effect">
+                <a href="#!" class="blue-text">5</a>
+              </li>
+              <li class="waves-effect">
+                <a href="#!" class="blue-text">
+                  <i class="material-icons">chevron_right</i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

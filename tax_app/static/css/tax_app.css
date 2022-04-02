@@ -1,3 +1,10 @@
+.logo-img {
+    /* position: inherit; */
+    /* top: 0px; */
+    width: 64px;
+    /* height: auto; */
+}
+
 .bill-form-class {
     /* background-color: rgb(142, 146, 148) !important; */
     border-radius: 10px !important;

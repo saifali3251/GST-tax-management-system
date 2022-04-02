@@ -17,7 +17,7 @@
 
 
   <!-- Google Font awesome -->
-  {% comment %} <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> {% endcomment %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
 
@@ -35,41 +35,136 @@
     <nav class="transparent">
       <div class="container">
         <div class="nav-wrapper black-text">
-          <a href="{% url 'tax_app:homepage' %}" class="brand-logo black-text hide-on-med-on-down">
-            GST
+          <a href="{% url 'tax_app:homepage' %}" class="brand-logo black-text">
+            <img class="logo-img" src="{% static 'images/gst_1.png' %}" alt="GST">
           </a>
-          <a href="#" data-activates='mobile-nav' class="button-collapse">
+          <a href="#" data-activates="side-nav" class="black-text button-collapse show-on-large right">
             <i class="material-icons">menu</i>
           </a>
+          {% comment %} <a href="#" data-activates='mobile-nav' class="button-collapse">
+            <i class="material-icons">menu</i>
+          </a> {% endcomment %}
           <ul class="right hide-on-med-and-down">
               {% if user.is_authenticated %}
               {% if user.is_superuser %}
               <li><a class="black-text" href="{% url 'user_list' %}">Users</a></li>
               <li><a class="black-text" href="{% url 'tax_app:bill_stats' %}">
-                Stats
+                Dashboard
               </a></li>
               {% endif %}
               <li><a class="black-text" href="{% url 'tax_app:bill_list' %}">Bills</a></li>
-              <li><a class="black-text" href="{% url 'tax_app:add_bill' %}">Add Bill</a></li>
-              <li><a class="black-text" href="{% url 'profile' %}">{{user.username}}[{{user.profile.role}}]</a></li>
+              {% comment %} <li><a class="black-text" href="{% url 'tax_app:add_bill' %}">Add Bill</a></li> {% endcomment %}
+              {% comment %} <li><a class="black-text" href="{% url 'profile' %}">{{user.username}}[{{user.profile.role}}]</a></li> {% endcomment %}
               <li><a class="black-text" href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
             <li><a class="black-text" href="{% url 'register' %}">Sign Up</a></li>
             <li><a class="black-text" href="{% url 'login' %}">LogIn</a></li>
             {% endif %}
           </ul>
+          <!-- Side nav -->
+        <ul id="side-nav" class="side-nav">
+          <li>
+            <div class="user-view">
+              <div class="background">
+                <img src="{% static 'images/side_bg_cover.png' %}" alt="">
+              </div>
+              <a href="#">
+                <img src="{% static 'images/alt_user.png' %}" alt="user_icon" class="circle">
+              </a>
+              <a href="#">
+                <span class="name white-text">{{ user.username }}</span>
+              </a>
+              <a href="#">
+                <span class="email white-text">{{ user.profile.role }}</span>
+              </a>
+            </div>
+          </li>
+          <li>
+            <a href="index.html">
+              <i class="material-icons green-text">dashboard</i> Dashboard</a>
+          </li>
+          <li>
+            <a href="posts.html">Bills</a>
+          </li>
+          <li>
+            <a href="categories.html">Add New Bills</a>
+          </li>
+          <li>
+            <a href="comments.html">Drafts</a>
+          </li>
+          <li>
+            <a href="users.html">Users</a>
+          </li>
+          <li>
+            <div class="divider"></div>
+          </li>
+          <li>
+            <a class="subheader">Account Controls</a>
+          </li>
+          <li>
+            <a href="login.html" class="waves-effect">Logout</a>
+          </li>
+        </ul>
         </div>
       </div>
     </nav>
   </header>
 
   <div class="divider white"></div>
- 
+
   <section class="search-section">
     {% block searchcontent %}
     {% endblock %}
   </section>
   <br>
+
+  {% comment %} <!-- Section: Stats -->
+  <section class="section section-stats center">
+    <div class="row">
+      <div class="col s12 m6 l3">
+        <div class="card-panel blue lighten-1 white-text center">
+          <i class="material-icons medium">insert_emoticon</i>
+          <h5>Monthly Visitors</h5>
+          <h3 class="count">28300</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate white" style="width: 40%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l3">
+        <div class="card-panel center">
+          <i class="material-icons medium">mode_edit</i>
+          <h5>Blog Posts</h5>
+          <h3 class="count">105</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate blue lighten-1" style="width: 20%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l3">
+        <div class="card-panel blue lighten-1 white-text center">
+          <i class="material-icons medium">mode_comment</i>
+          <h5>Comments</h5>
+          <h3 class="count">1200</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate white" style="width: 40%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l3">
+        <div class="card-panel center">
+          <i class="material-icons medium">supervisor_account</i>
+          <h5>Users</h5>
+          <h3 class="count">350</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate blue lighten-1" style="width: 10%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> {% endcomment %}
+
+
 
   <section>
     {% comment %} <div class='container'>

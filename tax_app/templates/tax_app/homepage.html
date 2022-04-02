@@ -18,6 +18,8 @@
 
   <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
   <link type="text/css" rel="stylesheet" href="{% static 'css/blog.css' %}">
+  <link rel="stylesheet" href="{% static 'css/tax_app.css' %}">
+
 
   <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
   <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
@@ -33,43 +35,233 @@
       <div class="container">
         <div class="nav-wrapper black-text">
           <a href="{% url 'tax_app:homepage' %}" class="brand-logo black-text">
-            GST Tax-System</span>
+            <img class="logo-img" src="{% static 'images/gst_1.png' %}" alt="friends-logo">
           </a>
-          <a href="#" data-activates='mobile-nav' class="button-collapse">
+          <a href="#" data-activates="side-nav" class="black-text button-collapse show-on-large right">
             <i class="material-icons">menu</i>
           </a>
+          {% comment %} <a href="#" data-activates='mobile-nav' class="button-collapse">
+            <i class="material-icons">menu</i>
+          </a> {% endcomment %}
           <ul class="right hide-on-med-and-down">
-            {% comment %} <li>
-              {% block nav-searchcontent %}
-              {% endblock %}
-            </li>
-            <li>
-              <a href="{% url 'blog:post_list' %}">
-                All Posts <span class="blue darken-3 white-text total-posts">
-                  {% total_posts %}
-                </span>
-              </a>
-            </li> {% endcomment %}
-            <!-- <li>
-            </li> -->
-            <!-- <li><a href="{% url blog:about_us }"></a></li>comment it -->
-            {% comment %} <li><a class="" href="#">Tags</a></li> {% endcomment %}
             {% if user.is_authenticated %}
             {% if user.is_superuser %}
             <li><a class="black-text" href="{% url 'user_list' %}">Users</a></li>
-            {% comment %} <li><a class="black-text" href="{% url 'register' %}">Add User</a></li> {% endcomment %}
+            <li><a class="black-text" href="{% url 'tax_app:bill_stats' %}">
+              <b>Dashboard</b>
+            </a></li>
             {% endif %}
-              {% comment %} <li><a class="black-text" href="{% url 'tax_app:add_bill' %}">Add Bill</a></li> {% endcomment %}
-              <li><a class="black-text" href="{% url 'tax_app:bill_list' %}">Bills</a></li>
-              <li><a class="black-text" href="{% url 'profile' %}">{{user.username}}[{{user.profile.role}}]</a></li>
-              <li><a class="black-text" href="{% url 'logout' %}">Log Out</a></li>
-            {% else %}
-            <li><a class="black-text" href="{% url 'register' %}">Sign Up</a></li>
-            <li><a class="black-text" href="{% url 'login' %}">LogIn</a></li>
-            {% endif %}
-          </ul>
+            <li><a class="black-text" href="{% url 'tax_app:bill_list' %}">Bills</a></li>
+            {% comment %} <li><a class="black-text" href="{% url 'tax_app:add_bill' %}">Add Bill</a></li> {% endcomment %}
+            <li><a class="black-text" href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+          <li><a class="black-text" href="{% url 'register' %}">Sign Up</a></li>
+          <li><a class="black-text" href="{% url 'login' %}">LogIn</a></li>
+          {% endif %}
+        </ul>
+        {% if user.is_authenticated %}
+        <!-- Side nav -->
+      <ul id="side-nav" class="side-nav">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="{% static 'images/i1.jpg' %}" alt="">
+            </div>
+            <a href="#">
+              <img src="{% static 'images/alt_user.png' %}" alt="user_icon" class="circle">
+            </a>
+            <a href="#">
+              <span class="name white-text">{{ user.username }}</span>
+            </a>
+            <a href="#">
+              <span class="email white-text">{{ user.profile.role }}</span>
+            </a>
+          </div>
+        </li>
+        <li>
+          <a href="index.html">
+            <i class="material-icons green-text">dashboard</i> Dashboard</a>
+        </li>
+        <li>
+          <a href="posts.html">Bills</a>
+        </li>
+        <li>
+          <a href="categories.html">Add New Bills</a>
+        </li>
+        <li>
+          <a href="comments.html">Drafts</a>
+        </li>
+        <li>
+          <a href="users.html">Users</a>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a class="subheader">Account Controls</a>
+        </li>
+        <li>
+          <a href="login.html" class="waves-effect">Logout</a>
+        </li>
+      </ul>
+      {% endif %}
   </header>
   <br>
+
+  {% comment %} <!-- Section: Stats --> {% endcomment %}
+  {% if user.is_authenticated %}
+  <section class="section section-stats center">
+    <div class="row">
+      <div class="col s12 m6 l3">
+        <a href="{% url 'tax_app:bill_list' %}">
+          <div class="card-panel indigo lighten-1 white-text center">
+          <i class="material-icons medium">content_copy</i>
+          <h5>Total Bills</h5>
+          <h3 class="count">{{ context.count }}</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate orange darken-5" style="width: 40%;"></div>
+          </div>
+          </div>
+        </a>
+      </div>
+      {% if user.is_superuser %}
+      <a href="{% url 'tax_app:user_list' %}">
+      <div class="col s12 m6 l3">
+        <div class="card-panel center indigo-text">
+          <i class="material-icons medium">supervisor_account</i>
+          <h5>Users</h5>
+          <h3 class="count">{{context.user}}</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate blue lighten-1" style="width: 10%;"></div>
+          </div>
+        </div>
+      </div>
+      </a>
+      {% else %}
+      <div class="col s12 m6 l3">
+        <a href="{% url 'tax_app:add_bill' %}">
+        <div class="card-panel center indigo-text">
+          <i class="material-icons medium">mode_edit</i>
+          <h5>Add Bill</h5>
+          <h3 class="count">
+            <br>
+          </h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate blue lighten-1" style="width: 20%;"></div>
+          </div>
+        </div>
+      </a>
+      </div>
+      {% endif %}
+      <div class="col s12 m6 l3">
+        <a href="{% url 'tax_app:payment_status' pk='Paid' %}">
+        <div class="card-panel indigo lighten-1 white-text center">
+          <i class="material-icons medium">attach_money</i>
+          <h5>Amount Paid</h5>
+          <h3 class="count">{{ context.paid_tax }}</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate green darken-3" style="width: {{context.paid_share}}%;"></div>
+          </div>
+        </div>
+      </a>
+      </div>
+      <div class="col s12 m6 l3">
+        <a href="{% url 'tax_app:payment_status' pk='Unpaid' %}">
+        <div class="card-panel indigo-text lighten-1 center">
+          <i class="material-icons medium">attach_money</i>
+          <h5>Amount Due</h5>
+          <h3 class="count">{{ context.unpaid_tax }}</h3>
+          <div class="progress grey lighten-1">
+            <div class="determinate red darken-5" style="width: {{context.unpaid_share}}%;"></div>
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} Bill List {% endcomment %}
+  <section class="section section-recent">
+    <div class="row">
+      <div class="col s12 l8 m6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Recent Bills</span>
+            {% if context.partial_bills is None %}
+                <span>No Bills Found!</span>
+            {% else %}
+            <table class="striped">
+              <thead>
+                <tr>
+                  <th>Bill ID</th>
+                  <th>Tax Due</th>
+                  <th>Staus</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for bill in context.partial_bills %}
+                <tr>
+                  <td>{{ bill.id }}</td>
+                  <td>{{ bill.total_tax }}</td>
+                  <td>{{ bill.paymentStatus }}</td>
+                  <td>
+                    <a href="{{ bill.get_absolute_url }}" class="btn indigo lighten-2">Details</a>
+                  </td>
+                </tr>
+                {% comment %} <tr>
+                  <td>Post Two</td>
+                  <td>Graphic Design</td>
+                  <td>
+                    <a href="details.html" class="btn blue lighten-2">Details</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Post Three</td>
+                  <td>Web Development</td>
+                  <td>
+                    <a href="details.html" class="btn blue lighten-2">Details</a>
+                  </td>
+                </tr> {% endcomment %}
+                {% endfor %}
+              </tbody>
+            </table>
+            {% endif %}
+            <span class="right"><a href="{% url 'tax_app:bill_list' %}">more..</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Quick Todos</span>
+            <form id="todo-form">
+              <div class="input-field">
+                <input id="todo" type="text" placeholder="Add Todo...">
+              </div>
+            </form>
+            <ul class="collection todos">
+              <li class="collection-item">
+                <div>Todo One
+                  <a href="#!" class="secondary-content delete">
+                    <i class="material-icons">close</i>
+                  </a>
+                </div>
+              </li>
+              <li class="collection-item">
+                <div>Todo Two
+                  <a href="#!" class="secondary-content delete">
+                    <i class="material-icons">close</i>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% else %}
   <h3 class="container center">Features</h3>
   <div class='container'>
     <div class='row'>
@@ -93,6 +285,7 @@
         </ol>
     </div>
   </div>
+{% endif %}
 
   <!-- Footer -->
   {% comment %} <footer class="page-footer purple darken-3">
