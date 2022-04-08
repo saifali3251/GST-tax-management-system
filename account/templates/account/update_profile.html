@@ -8,7 +8,7 @@
   <form method="post">
     {% csrf_token %}
     {% comment %} {{ user_form.as_p }} {% endcomment %}
-    <a class="dropdown-button" data-activates="my-dropdown" href="#!">Select State</a>
+    {% comment %} <a class="dropdown-button" data-activates="my-dropdown" href="#!">Select State</a> {% endcomment %}
     {{ form.as_p }}
     <button class='btn' type="submit">Update Role</button>
   </form>

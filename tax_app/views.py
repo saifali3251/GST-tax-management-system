@@ -20,15 +20,16 @@ U_T = ['Andaman And Nicobar Islands','Chandigarh','Dadra And Nagar Haveli','Dama
 
 # Create your views here.
 
+
 @login_required
 def homepage(request):
   context = {}
   context['user'] = User.objects.all().count() - 1
-  print(context['user'])
+  # print(context['user'])
   if str(request.user) == 'admin' or str(request.user.profile.role) == 'Tax-Accountant':
     bills = Tax.objects.all().exclude(userId=1).order_by('id')
   else:
-    # print('Else..')
+    print('Else..')
     bills = Tax.objects.all().filter(userId=request.user).order_by('-created')
 
   context['count'] = bills.count()
@@ -47,8 +48,25 @@ def homepage(request):
     context['partial_bills'] = bills[:3]
     # print(context['partial_bills'])
     # unpaid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Unpaid')
-    unpaid_bill = Tax.objects.all().filter(paymentStatus='Unpaid')
-    paid_bill = Tax.objects.all().filter(paymentStatus='Paid')
+    # context['net_tax'] = Tax.objects.all().aggregate(Sum('total_tax'))
+    # context['net_tax'] = context['net_tax']['total_tax__sum']
+    # print(context['net_tax'])
+    # if str(request.user) == 'admin':
+    if str(request.user) == 'admin' or str(request.user.profile.role) == 'Tax-Accountant':
+      unpaid_bill = Tax.objects.all().filter(paymentStatus='Unpaid')
+      paid_bill = Tax.objects.all().filter(paymentStatus='Paid')
+      context['net_tax'] = Tax.objects.all().aggregate(Sum('total_tax'))
+      context['net_tax'] = context['net_tax']['total_tax__sum']
+    else:
+      unpaid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Unpaid')
+      paid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Paid')
+      context['net_tax'] = Tax.objects.all().filter(userId=request.user).aggregate(Sum('total_tax'))
+      context['net_tax'] = context['net_tax']['total_tax__sum']
+
+    # unpaid_bill = Tax.objects.all().filter(paymentStatus='Unpaid')
+    # unpaid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Unpaid')
+    # paid_bill = Tax.objects.all().filter(paymentStatus='Paid')
+    # paid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Paid')
     # paid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Paid')
     context['unpaid_tax'] = unpaid_bill.aggregate(Sum('total_tax'))
     context['paid_tax'] = paid_bill.aggregate(Sum('total_tax'))
@@ -58,24 +76,24 @@ def homepage(request):
       context['paid_share'] = 0
     else:
       context['paid_tax'] = round(context['paid_tax']['total_tax__sum'],2)
-      # context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
+      context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
 
     if context['unpaid_tax']['total_tax__sum'] == None:
       context['unpaid_tax'] = 0
       context['unpaid_share'] = 0
     else:
       context['unpaid_tax'] = round(context['unpaid_tax']['total_tax__sum'],2)
-      # context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
+      context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
 
     # context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
     # context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
 
     # context['paid_tax'] = round(context['paid_tax']['total_tax__sum'],2)
-    context['net_tax'] = context['paid_tax']+context['unpaid_tax']
-    if context['paid_tax'] != None:
-      context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
-    if context['unpaid_tax'] !=None:
-      context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
+    # context['net_tax'] = context['paid_tax']+context['unpaid_tax']
+    # if context['paid_tax'] != 0:
+      # context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
+    # if context['unpaid_tax'] != 0:
+      # context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
 
   # context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
   # context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
@@ -84,7 +102,83 @@ def homepage(request):
   # context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
   # context['paid_tax'] = round(context['paid_tax']['total_tax__sum'],2)
   # context['unpaid_tax'] = round(context['unpaid_tax']['total_tax__sum'],2)
-  # print(context['paid_share'])
+  print(context['paid_tax'])
+  print(context['unpaid_tax'])
+  return render(request,'homepage.html',{'bills':bills,'context':context})
+
+
+
+@login_required
+def admin_dashboard(request):
+  context = {}
+  context['user'] = User.objects.all().count() - 1
+  # print(context['user'])
+  if str(request.user) == 'admin' or str(request.user.profile.role) == 'Tax-Accountant':
+    bills = Tax.objects.all().exclude(userId=1).order_by('id')
+  else:
+    print('Else..')
+    bills = Tax.objects.all().filter(userId=request.user).order_by('-created')
+
+  context['count'] = bills.count()
+  # print('Total count : ',context['count'])
+  # print('Total count : ',type(context['count']))
+  if context['count'] == 0:
+    print('Total count : ',context['count'])
+    context['unpaid_tax'] = 0
+    context['paid_tax'] = 0
+    context['partial_bills'] = None
+    print(context['partial_bills'])
+    context['paid_share'] = 0
+    context['unpaid_share'] = 0
+    context['net_tax'] = 0
+  else:
+    context['partial_bills'] = bills[:3]
+    # print(context['partial_bills'])
+    # unpaid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Unpaid')
+    context['net_tax'] = Tax.objects.all().aggregate(Sum('total_tax'))
+    context['net_tax'] = context['net_tax']['total_tax__sum']
+    print(context['net_tax'])
+    unpaid_bill = Tax.objects.all().filter(paymentStatus='Unpaid')
+    # unpaid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Unpaid')
+    paid_bill = Tax.objects.all().filter(paymentStatus='Paid')
+    # paid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Paid')
+    # paid_bill = Tax.objects.all().filter(userId=request.user,paymentStatus='Paid')
+    context['unpaid_tax'] = unpaid_bill.aggregate(Sum('total_tax'))
+    context['paid_tax'] = paid_bill.aggregate(Sum('total_tax'))
+    # context['net_tax'] = context['paid_tax']+context['unpaid_tax']
+    if context['paid_tax']['total_tax__sum'] == None:
+      context['paid_tax'] = 0
+      context['paid_share'] = 0
+    else:
+      context['paid_tax'] = round(context['paid_tax']['total_tax__sum'],2)
+      context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
+
+    if context['unpaid_tax']['total_tax__sum'] == None:
+      context['unpaid_tax'] = 0
+      context['unpaid_share'] = 0
+    else:
+      context['unpaid_tax'] = round(context['unpaid_tax']['total_tax__sum'],2)
+      context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
+
+    # context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
+    # context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
+
+    # context['paid_tax'] = round(context['paid_tax']['total_tax__sum'],2)
+    # context['net_tax'] = context['paid_tax']+context['unpaid_tax']
+    # if context['paid_tax'] != 0:
+      # context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
+    # if context['unpaid_tax'] != 0:
+      # context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
+
+  # context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
+  # context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
+
+  # context['paid_share'] = round((context['paid_tax']/context['net_tax'])*100,2)
+  # context['unpaid_share'] = round((context['unpaid_tax']/context['net_tax'])*100,2)
+  # context['paid_tax'] = round(context['paid_tax']['total_tax__sum'],2)
+  # context['unpaid_tax'] = round(context['unpaid_tax']['total_tax__sum'],2)
+  print(context['paid_tax'])
+  print(context['unpaid_tax'])
   return render(request,'homepage.html',{'bills':bills,'context':context})
 
 
@@ -229,7 +323,6 @@ def BillDeleteView(request,pk):
   return render(request,'website_confirm_delete.html',context)
 
 
-
 @login_required
 def payment_status(request,pk):
   if str(request.user) == 'admin' or str(request.user.profile.role) == 'Tax-Accountant':
@@ -240,7 +333,6 @@ def payment_status(request,pk):
   bill_length = bills.count()
   print(bill_length)
   return render(request,'bill_list.html',{'bills':bills,'bill_length':bill_length})
-
 
 
 @login_required
@@ -255,6 +347,7 @@ def bill_status(request,pk):
   return render(request,'bill_list.html',{'bills':bills,'bill_length':bill_length})
 
 prev_tax = 0
+
 
 @login_required
 def bill_stats(request):
@@ -282,4 +375,3 @@ def bill_stats(request):
   return render(request,'bill_stats.html',{'context':context})
 
 
-# net_change = total_tax

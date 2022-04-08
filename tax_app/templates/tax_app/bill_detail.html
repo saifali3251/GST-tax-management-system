@@ -5,42 +5,81 @@
 <section class="section title-section ">
   <h4 class="post-title center-align black-text">{{ bill.userId }}</h4>
   <div class="container">
-  <p>Bill Id : {{ bill.id }}</p>
-  <p>State : {{ bill.state }}</p>
-  <p>Created By : {{ bill.userId }}</p>
-  <p>User Id : {{ bill.userId.id }}</p>
-  <p>PAN CARD : {{ bill.PanCard }}</p>
-  <p>Salary : {{ bill.salaryIncome }}</p>
-  <p>Stock Income : {{ bill.stockIncome }}</p>
-  <p>Bill Status : {{ bill.STATUS }}</p>
-  <p>Fine : {{ bill.fines }}</p>
-  <p>Tax Due : {{ bill.total_tax }}</p>
-  <p>Created : {{ bill.created }}</p>
-  <p>Last Updated : {{ bill.updated }}</p>
-  <p>DueDate : {{ bill.dueDate }}</p>
-  <p>Payment Status : <b>{{ bill.paymentStatus }}</b></p>
+    <div class="row card z-depth-3">
+      <div class="col m6 offset-s0">
+        <div class="box">
+           <p><b>Bill Id :</b> {{ bill.id }}</p>
+        </div>
+        <div class="box">
+           <p><b>State :</b> {{ bill.state }}</p>
+        </div>
+        <div class="box">
+           <p><b>Created By :</b> {{ bill.userId }}</p>
+        </div>
+        <div class="box">
+           <p><b>User Id :</b> {{ bill.userId.id }}</p>
+        </div>
+        <div class="box">
+           <p><b>PAN CARD :</b> {{ bill.PanCard }}</p>
+        </div>
+        <div class="box">
+           <p><b>Created :</b> {{ bill.created }}</p>
+        </div>
+        <div class="box">
+           <p><b>Last Updated :</b> {{ bill.updated }}</p>
+        </div>
+      </div>
+      <div class="col m6 offset-s0">
+        <div class="box">
+           <p><b>Salary Income :</b> {{ bill.salaryIncome }}</p>
+        </div>
+        <div class="box">
+           <p><b>Tax Due :</b> {{ bill.total_tax }}</p>
+        </div>
+        <div class="box">
+           <p><b>Fine :</b> {{ bill.fines }}</p>
+        </div>
+        <div class="box">
+           <p><b>Payment Status :</b> <b>{{ bill.paymentStatus }}</b></p>
+        </div>
+        <div class="box">
+           <p><b>DueDate :</b> {{ bill.dueDate }}</p>
+        </div>
+        <div class='box'>
+           <p><b>Stock Income :</b> {{ bill.stockIncome }}</p>
+        </div>
+        <div class='box'>
+           <p><b>Bill Status :</b> {{ bill.STATUS }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
+<br>
+<br>
+  <div class='row'>
+    <div class='container'>
+      {% if bill.userId == request.user or user.is_superuser or user.profile.role == 'Tax-Accountant' %}
+        {% if bill.paymentStatus == 'Paid' %}
+        <a class="btn btn-primary">Update</a>
+        {% else %}
+        <a class="btn btn-primary" href="{% url 'tax_app:bill_update' pk=bill.id %}">Update</a>
+        {% endif %}
+        <a class="btn btn-danger red " href="{% url 'tax_app:bill_delete' pk=bill.id %}">Delete</a>
 
-  {% if bill.userId == request.user or user.is_superuser or user.profile.role == 'Tax-Accountant' %}
-    {% if bill.paymentStatus == 'Paid' %}
-    <a class="btn btn-primary">Update</a>
-    {% else %}
-    <a class="btn btn-primary" href="{% url 'tax_app:bill_update' pk=bill.id %}">Update</a>
-    {% endif %}
-    <a class="btn btn-danger red" href="{% url 'tax_app:bill_delete' pk=bill.id %}">Delete</a>
-
-  {% endif %}
-  {% if bill.userId == request.user %}
-    {% if bill.paymentStatus == 'Paid' %}
-    <a class="btn btn-primary green darken-3">Paid</a>
-    {% else %}
-    <a class="btn btn-primary yellow darken-3" href="{% url 'tax_app:bill_pay' pk=bill.id %}">Pay Now</a>
-    {% endif %}
-  {% endif %}
+      {% endif %}
+      {% if bill.userId == request.user %}
+        {% if bill.paymentStatus == 'Paid' %}
+        <a class="btn btn-primary green darken-3">Paid</a>
+        {% else %}
+        <a class="btn btn-primary yellow darken-3" href="{% url 'tax_app:bill_pay' pk=bill.id %}">Pay Now</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
 
   {% comment %} <div class="published-date center">Published : {{ post.publish | date:"d M Y" }}</div> {% endcomment %}
 </section>
-
 {% comment %} {% if bill.length==0 %} {% endcomment %}
 {% comment %} <h3>No bills found!</h3> {% endcomment %}
 {% comment %} {% endif %} {% endcomment %}

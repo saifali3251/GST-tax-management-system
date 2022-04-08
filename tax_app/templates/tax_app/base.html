@@ -62,7 +62,58 @@
             {% endif %}
           </ul>
           <!-- Side nav -->
-        <ul id="side-nav" class="side-nav">
+          {% if user.is_authenticated %}
+        <!-- Side nav -->
+      <ul id="side-nav" class="side-nav">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="{% static 'images/side_bg_cover.png' %}" alt="">
+              {% comment %} <img src="{% static 'images/i1.jpg' %}" alt=""> {% endcomment %}
+            </div>
+            <a href="#">
+              <img src="{% static 'images/alt_user.png' %}" alt="user_icon" class="circle">
+            </a>
+            <a href="#">
+              <span class="name white-text">{{ user.username }}</span>
+            </a>
+            <a href="#">
+              <span class="email white-text">{{ user.profile.role }}</span>
+            </a>
+          </div>
+        </li>
+        <li>
+          <a href="{% url 'tax_app:homepage' %}">
+            <i class="material-icons green-text">dashboard</i> Dashboard</a>
+        </li>
+        <li>
+          <a href="{% url 'tax_app:bill_list' %}">Bills</a>
+        </li>
+        <li>
+        <a href="{% url 'tax_app:add_bill' %}">Add New Bills</a>
+          {% comment %} <a >Add New Bills</a> {% endcomment %}
+        </li>
+        <li>
+          <a class='disabled'>Drafts</a>
+        </li>
+        {% if user.is_superuser %}
+        <li>
+          <a href="users.html">Users</a>
+        </li>
+        {% endif %}
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a class="subheader">Account Controls</a>
+        </li>
+        <li>
+          <a class="black-text waves-effect" href="{% url 'logout' %}">Logout</a>
+          {% comment %} <a href="login.html" class="waves-effect">Logout</a> {% endcomment %}
+        </li>
+      </ul>
+      {% endif %}
+        {% comment %} <ul id="side-nav" class="side-nav">
           <li>
             <div class="user-view">
               <div class="background">
@@ -104,7 +155,7 @@
           <li>
             <a href="login.html" class="waves-effect">Logout</a>
           </li>
-        </ul>
+        </ul> {% endcomment %}
         </div>
       </div>
     </nav>
