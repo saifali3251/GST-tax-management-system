@@ -51,3 +51,17 @@ A tax management system with following features:
   - TA can view all the users list and their bills and can filter the bills based on different params
   - ADMIN has all the rights except User's bill update once bill is paid
   - ADMIN can create any number of TA and can also revert those changes
+
+
+User Dashboard :
+![image](https://user-images.githubusercontent.com/37900854/166160074-8ee7708d-42a7-4bf9-a7df-ff597f4d3e6f.png)
+
+Add Bill :
+![image](https://user-images.githubusercontent.com/37900854/166160182-6b009f8b-1575-43a3-b9ef-4e8fa1247916.png)
+
+Update Bill :
+![image](https://user-images.githubusercontent.com/37900854/166160209-aa4565a3-b866-4eff-9093-f04fedf149a6.png)
+
+
+
+
