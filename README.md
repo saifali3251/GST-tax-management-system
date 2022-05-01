@@ -64,4 +64,18 @@ Update Bill :
 
 
 
+Admin Dashboard :
+
+![image](https://user-images.githubusercontent.com/37900854/166160252-e0b5aaaf-707a-4c99-b10f-096db4ddea23.png)
+
+Bill list(for all users)(only accessed by Admin and Tax Accountant)
+
+![image](https://user-images.githubusercontent.com/37900854/166160308-d754ccf3-7ad2-4184-9a12-06126ed55cb1.png)
+
+User List(Can be accessed by Admin Only) :
+
+![image](https://user-images.githubusercontent.com/37900854/166160360-8323460a-102a-4d6f-818d-59b4e8f029a1.png)
+
+
+
 
