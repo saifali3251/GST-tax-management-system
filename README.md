@@ -36,6 +36,12 @@ python manage.py runserver
 
 <h1 align="center">GST tax management system</h1>
 
+Tech Stack Used :
+  - Django Framework
+  - Django Templates
+  - Materialize CSS
+  
+
 A tax management system with following features:
   - Users can register and login. By default all the new users are "Tax-Payer" 
   - Users can add bills using bill form.
